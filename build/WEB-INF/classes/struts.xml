@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="global" />
+	
+	<package name="devironments"  extends="struts-default">
+		<default-action-ref name="fallback"/>
+		
+		<!-- List Actions -->
+		<action name="list">
+			<result>/list.jsp</result>
+		</action>
+				
+		<action name="populatelist" class="action.ListAction" method="execute">
+			<result name="success">/listhelper.jsp</result>
+		</action>
+		
+		<!-- Insert Action -->
+  		<action name="insert" class="action.InsertAction" method="input" >
+			<result name="input">/insert.jsp</result>
+		</action>
+
+		<action name="insert" class="action.InsertAction" method="execute">
+			<result name="success">/list.jsp</result>
+			<result name="input">/insert.jsp</result>
+		</action>
+		
+		<!-- Default Action -->
+		<action name="fallback" >
+			<result>/list.jsp</result>
+		</action>
+	</package>
+</struts>
