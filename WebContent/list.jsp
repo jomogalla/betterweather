@@ -28,7 +28,6 @@
 		{list}
 		<a href="insert.jsp" >insert</a> 	
 	</div>
-
 	<hr/>
 
 	<%-- displays the insertion text if an object was inserted --%>

@@ -19,6 +19,10 @@
 			<result name="success">/listhelper.jsp</result>
 		</action>
 		
+		<action name="getWeather" class="action.WeatherAction" method="execute">
+			<result name="success">/listhelper.jsp</result>
+		</action>
+		
 		<!-- Insert Action -->
   		<action name="insert" class="action.InsertAction" method="input" >
 			<result name="input">/insert.jsp</result>

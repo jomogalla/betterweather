@@ -8,7 +8,7 @@
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<!-- 	replace localhost with ip if needed 
 				replace ide with the name of the database to be used -->
-		<property name="connection.url">jdbc:mysql://localhost/ide</property>
+		<property name="connection.url">jdbc:mysql://localhost/woofwoof</property>
 		<!-- 	replace root with your mysql username -->
 		<property name="connection.username">root</property>
 		<!-- 	replace jcd213 with your mysql password -->
