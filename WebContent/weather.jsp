@@ -14,6 +14,9 @@
 		.cells{
 			background-color:#EDDFD1;
 		}
+		.oddcells{
+			background-color:#333FD1;
+		}
 		.top{
 			background-color:#d6b89a;
 		}
@@ -21,20 +24,38 @@
 			font-size: small;
 			font-style:italic;
 		}
+		.mainform{
+			display:inline-block;
+		}
 	</style>
 </head>
 <body>
-	<s:form action="getWeather" >
+	<s:form action="getWeather" class="mainform">
 		  <s:textfield key="parametersBean.zipCode" />
 		  <s:textfield key="parametersBean.radius" /> 
 		  
-		  <s:submit key= "go"/>  	  
+		  <s:submit key= "submit"/>  	  
 	</s:form>	
 
 	<hr/>
 
-	<%-- Renders the list from the database --%>	
-	<s:action name="populatelist" executeResult="true" />
+	<%-- Renders the list from the database --%>
+	<table>
+		<s:iterator value="cityBeans" status="rowstatus">
+			<tr>
+				<s:if test="#rowstatus.even == true">
+					<td class="cells" ><s:property value="city"/></td>
+					<td class="cells" ><s:property value="state"/></td>
+					<td class="cells" ><s:property value="distance"/></td>
+				</s:if>
+				<s:else>
+					<td class="oddcells"><s:property value="city"/></td>
+					<td class="oddcells"><s:property value="state"/></td>
+					<td class="oddcells"><s:property value="distance"/></td>
+				</s:else>
+			</tr>
+		</s:iterator>
+	</table>
 </body>
 </html>
 

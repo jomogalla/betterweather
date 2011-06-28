@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+            <!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+	<class name="model.City" table="zipcodes">
+		<id name="id" column="zip">
+		
+		</id>
+		
+		<property name="city" type="string" column="city" />
+		<property name="state" type="string" column="state" />
+<!--		<property name="geoloc" type="org.hibernatespatial.postgis.PGGeometryUserType" column="geoloc" /> -->
+		<property name="distance" type="double" column="distance" />
+	</class>
+ 
+</hibernate-mapping>

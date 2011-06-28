@@ -7,8 +7,8 @@ public class Parameters
 	private long id;
     private int zipCode;
     private int radius;
-    private Date startDate;
-    private Date endDate;
+//    private Date startDate;
+//    private Date endDate;
 	
 
     public int getRadius()
@@ -30,7 +30,7 @@ public class Parameters
     {
         this.zipCode = zipCode;
     }
-    
+ /*   
     public Date getStartDate()
     {
         return startDate;
@@ -50,7 +50,7 @@ public class Parameters
     {
         this.endDate = endDate;
     }
- 
+ */
     public long getId()
     {
 		return id;

@@ -5,9 +5,11 @@ public class City
 	private long id;
     private String city;
     private String state;
-    private double longitude;
-	private double latitude;
+ //   private double longitude;   //not sure if this should be a geoloc or lat/long???
+//	private double latitude;	//the lat/long is only needed for the weather data, and then
+								//matching it up the city  and weather, so prolly should be a latlong :(
 	private double distance;
+	private double geoLoc;
 
     public String getCity()
     {
@@ -28,17 +30,17 @@ public class City
     {
         this.state = state;
     }
-
-    public double getLongitude()
+/*
+    public double getGeoLoc()
     {
-        return longitude;
+        return geoLoc;
     }
 
-    public void setLongitude(double longitude)
+	public void setGeoLoc(double geoLoc)
     {
-        this.longitude = longitude;
+        this.geoLoc = geoLoc;
     }
-    
+*/   
     public double getDistance()
     {
         return distance;
@@ -49,16 +51,6 @@ public class City
         this.distance = distance;
     }
     
-    public double getLatitude()
-    {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude)
-    {
-        this.latitude = latitude;
-    }
- 
     public long getId()
     {
 		return id;
@@ -68,7 +60,7 @@ public class City
 	{
 		this.id = id;
 	}
-	
+
     public String toString()
     {
         return "City: " + getCity() + " | State: " + getState() + 

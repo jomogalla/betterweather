@@ -4,17 +4,15 @@
                 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
 <hibernate-mapping>
-	<!-- replace environments with the table to be used
-		the table must have fields: id=INT, OS=VARCHAR(30), OS_VERSION=VARCHAR(30), notes=LONGTEXT -->
-	<class name="model.Ide" table="cities">
-		<id name="id" column="geoID">
-			<generator class="increment" />
+	<class name="model.City" table="zipcodes">
+		<id name="id" column="zip">
+		
 		</id>
 		
 		<property name="city" type="string" column="city" />
 		<property name="state" type="string" column="state" />
-		<property name="longitude" type="double" column="longitude" />
-		<property name="latitude" type="double" column="latitude" />
+<!--		<property name="geoloc" type="org.hibernatespatial.postgis.PGGeometryUserType" column="geoloc" /> -->
+		<property name="distance" type="double" column="distance" />
 	</class>
  
 </hibernate-mapping>

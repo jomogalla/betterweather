@@ -7,7 +7,7 @@
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.custom.i18n.resources" value="global" />
 	
-	<package name="devironments"  extends="struts-default">
+	<package name="betterweather"  extends="struts-default">
 		<default-action-ref name="fallback"/>
 		
 		<!-- List Actions -->
@@ -20,7 +20,7 @@
 		</action>
 		
 		<action name="getWeather" class="action.WeatherAction" method="execute">
-			<result name="success">/listhelper.jsp</result>
+			<result name="success">/weather.jsp</result>
 		</action>
 		
 		<!-- Insert Action -->
@@ -35,7 +35,7 @@
 		
 		<!-- Default Action -->
 		<action name="fallback" >
-			<result>/list.jsp</result>
+			<result>/weather.jsp</result>
 		</action>
 	</package>
 </struts>

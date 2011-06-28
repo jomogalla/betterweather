@@ -10,20 +10,21 @@
 <body>
 <%-- 	The following code generates a two column table from the value 
 		of ideBeans off the stack. The class cells has a single style
-		which makes the background that nice brown					--%>	
+		which makes the background that nice brown					--%>
+		
+			
 	<table>
-		<td class="top">os</td><td class="top">os version</td><td class="top">notes</td>
-		<s:iterator value="ideBeans" status="rowstatus">
+		<s:iterator value="cityBeans" status="rowstatus">
 			<tr>
 				<s:if test="#rowstatus.even == true">
-					<td class="cells" ><s:property value="os"/></td>
-					<td class="cells" ><s:property value="os_version"/></td>
-					<td class="cells" ><s:property value="notes"/></td>
+					<td class="cells" ><s:property value="city"/></td>
+					<td class="cells" ><s:property value="state"/></td>
+					<td class="cells" ><s:property value="distance"/></td>
 				</s:if>
 				<s:else>
-					<td><s:property value="os"/></td>
-					<td><s:property value="os_version"/></td>
-					<td><s:property value="notes"/></td>
+					<td class="oddcells"><s:property value="city"/></td>
+					<td class="oddcells"><s:property value="state"/></td>
+					<td class="oddcells"><s:property value="distance"/></td>
 				</s:else>
 			</tr>
 		</s:iterator>
