@@ -1,15 +1,17 @@
 package model;
 
+import com.vividsolutions.jts.geom.Point;
+
 public class City
 {
-	private long id;
+	private String id;
     private String city;
     private String state;
  //   private double longitude;   //not sure if this should be a geoloc or lat/long???
 //	private double latitude;	//the lat/long is only needed for the weather data, and then
 								//matching it up the city  and weather, so prolly should be a latlong :(
 	private double distance;
-	private double geoLoc;
+	private Point geoLoc;
 
     public String getCity()
     {
@@ -30,17 +32,17 @@ public class City
     {
         this.state = state;
     }
-/*
-    public double getGeoLoc()
+
+    public Point getGeoLoc()
     {
         return geoLoc;
     }
 
-	public void setGeoLoc(double geoLoc)
+	public void setGeoLoc(Point geoLoc)
     {
         this.geoLoc = geoLoc;
     }
-*/   
+   
     public double getDistance()
     {
         return distance;
@@ -51,12 +53,12 @@ public class City
         this.distance = distance;
     }
     
-    public long getId()
+    public String getId()
     {
 		return id;
 	}
 	
-	public void setId(long id)
+	public void setId(String id)
 	{
 		this.id = id;
 	}

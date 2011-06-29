@@ -6,13 +6,13 @@
 <hibernate-mapping>
 	<class name="model.City" table="zipcodes">
 		<id name="id" column="zip">
-		
+			<generator class="native"/>
 		</id>
 		
 		<property name="city" type="string" column="city" />
 		<property name="state" type="string" column="state" />
-<!--		<property name="geoloc" type="org.hibernatespatial.postgis.PGGeometryUserType" column="geoloc" /> -->
-		<property name="distance" type="double" column="distance" />
+		<property name="geoLoc" type="org.hibernatespatial.postgis.PGGeometryUserType" column="geoloc" /> 
+		<!--<property name="distance" type="double" column="distance" />-->
 	</class>
  
 </hibernate-mapping>

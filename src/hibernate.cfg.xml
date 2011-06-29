@@ -15,7 +15,7 @@
 		<property name="connection.password">k1ttenm1ttens</property>
  
 		<!-- SQL dialect -->
-		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="dialect">org.hibernatespatial.postgis.PostgisDialect</property>
  
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>

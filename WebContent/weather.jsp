@@ -33,13 +33,17 @@
 	<s:form action="getWeather" class="mainform">
 		  <s:textfield key="parametersBean.zipCode" />
 		  <s:textfield key="parametersBean.radius" /> 
-		  
 		  <s:submit key= "submit"/>  	  
 	</s:form>	
 
 	<hr/>
 
 	<%-- Renders the list from the database --%>
+	<s:if test="centerLoc!=null">
+		<p class="insertionsuccess">
+			inserted ~ <s:property value="centerLoc" />
+		</p>
+	</s:if>
 	<table>
 		<s:iterator value="cityBeans" status="rowstatus">
 			<tr>

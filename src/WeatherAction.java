@@ -7,20 +7,24 @@ import model.City;
 import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 
+//added after the postgis tutorial
+import com.vividsolutions.jts.geom.Point;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.io.WKTReader;
+import com.vividsolutions.jts.io.ParseException;
+import org.hibernate.Criteria;
+import org.hibernatespatial.criterion.SpatialRestrictions;
+
 public class WeatherAction extends ActionSupport {
 		
 	private Parameters parametersBean;
 	private List<City> cityBeans;	
-	private int zipcode;
-	private int radius;
+	private List<City> centerLoc;
 
 	@Override
 	public String execute() throws Exception {		
-		zipcode = parametersBean.getZipCode();
-		radius = parametersBean.getRadius();	
-
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
+        
+        /*
 		//query returns lat/longs from the zipcode
 		//deprecated :(
 		cityBeans = session.createSQLQuery("SELECT DISTINCT ON (dest.city) dest.city, dest.state, ST_Distance(orig.geoloc, dest.geoloc)*0.0006214 AS distance, dest.zip FROM zipcodes orig, zipcodes dest WHERE ST_DWithin(orig.geoloc,dest.geoloc, :distance) AND orig.zip = :zipcode AND dest.zip <> :zipcode ;")
@@ -31,11 +35,10 @@ public class WeatherAction extends ActionSupport {
 		.setParameter("zipcode", zipcode)
 		.setParameter("distance", radius)
 		.list();
+		*/
+		find(parametersBean.getZipCode(),parametersBean.getRadius());
 		
-		
-		
-		
-		session.getTransaction().commit();
+	
 		
 
 	
@@ -50,9 +53,9 @@ public class WeatherAction extends ActionSupport {
 	// ideBean back to insert.jsp, so we just make one and pretend nothing ever happened ಠ_ಠ
 	
 	public void validate(){			//validation needs to be fixed
-		if (parametersBean.getZipCode() == 0 ){	 
-			addFieldError( "parametersBean.zipCode", "zipcode is required." );
-		}				
+		//if (parametersBean.getZipCode() == 0 ){	 
+		//	addFieldError( "parametersBean.zipCode", "zipcode is required." );
+		//}				
 		if (parametersBean.getRadius() == 0 ){	
 			addFieldError( "parametersBean.radius", "radius is required." );
 		}	
@@ -69,4 +72,21 @@ public class WeatherAction extends ActionSupport {
 	public List<City> getCityBeans(){
 		return cityBeans;
 	}
+	
+	public List<City> getCenterLoc(){
+		return centerLoc;
+	}
+	
+	private List find(String zipcode, int distance){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		centerLoc = session.createQuery("from City where id = :zipcode")
+		.setParameter("zipcode", zipcode)
+		.list();
+		
+		
+		session.getTransaction().commit();
+		return cityBeans;
+	}
+	
 }

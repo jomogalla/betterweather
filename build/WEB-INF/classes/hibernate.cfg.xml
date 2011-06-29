@@ -5,7 +5,7 @@
 <hibernate-configuration> 
 	<session-factory> 
 		<!-- Database connection settings -->
-		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="connection.driver_class">org.postgis.Driver</property>
 		<!-- 	replace localhost with ip if needed 
 				replace ide with the name of the database to be used -->
 		<property name="connection.url">jdbc:postgresql://localhost/better</property>
@@ -15,7 +15,7 @@
 		<property name="connection.password">k1ttenm1ttens</property>
  
 		<!-- SQL dialect -->
-		<property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+		<property name="dialect">org.hibernatespatial.postgis.PostgisDialect</property>
  
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
