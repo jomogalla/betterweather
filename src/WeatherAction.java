@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import model.HibernateUtil;
 import model.Parameters;
 import model.City;
+import model.CenterGeo;
 import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,7 +20,11 @@ public class WeatherAction extends ActionSupport {
 		
 	private Parameters parametersBean;
 	private List<City> cityBeans;	
-	private List<City> centerLoc;
+	private CenterGeo centerLoc;
+	private double minLat;
+	private double maxLat;
+	private double minLong;
+	private double maxLong;
 
 	@Override
 	public String execute() throws Exception {		
@@ -36,7 +41,9 @@ public class WeatherAction extends ActionSupport {
 		.setParameter("distance", radius)
 		.list();
 		*/
-		find(parametersBean.getZipCode(),parametersBean.getRadius());
+		
+		//maybe instead of using the parameters bean i can use the message store functionality of struts2?
+		findCities(parametersBean.getZipCode(), parametersBean.getRadius());
 		
 	
 		
@@ -73,20 +80,63 @@ public class WeatherAction extends ActionSupport {
 		return cityBeans;
 	}
 	
-	public List<City> getCenterLoc(){
+	public CenterGeo getCenterLoc(){
 		return centerLoc;
 	}
+	//for debugging
+	public String getMinLat(){
+		return String.valueOf(minLat);
+	}
 	
-	private List find(String zipcode, int distance){
+	private void findCities(int zipcode, int distance){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
+		//get the lat/long of the zipcode
 		session.beginTransaction();
-		centerLoc = session.createQuery("from City where id = :zipcode")
+		centerLoc = (CenterGeo) session.createQuery("from CenterGeo where id = :zipcode")
 		.setParameter("zipcode", zipcode)
-		.list();
+		.uniqueResult();
+	
+		//BUG ALERT!! Null Pointer Exception :( happens below when the jerks put in a fake zip
+	
+		//determine the max/min lat/long values
+		maxLat = centerLoc.getLatitude() + distance/69.09;
+		minLat = centerLoc.getLatitude() - distance/69.09;
+		maxLong = centerLoc.getLongitude() + distance/69.09;
+		minLong = centerLoc.getLongitude() - distance/69.09;
 		
-		
+		//get selection within the above parameters
+		cityBeans = session.createQuery("from City where latitude < :maxLat and latitude > :minLat and longitude < :maxLong and longitude > :minLong") 
+		.setParameter("maxLat", maxLat)
+		.setParameter("minLat", minLat)
+		.setParameter("maxLong", maxLong)
+		.setParameter("minLong", minLong)
+		.list();	
 		session.getTransaction().commit();
-		return cityBeans;
+		
+		//BUG ALERT!!! Putting in certain radius/zip combos spits out 0 distance
+		//specific example: zip=97401 and radius=70 spits out a ton of 0s
+		//the above example no longer holds true when radius=200??? who knows!
+		
+		//trim the list down to the actual radius
+		for(int i = 0; i < cityBeans.size(); i++)
+		{
+			cityBeans.get(i).setDistance(calcDistance(centerLoc.getLatitude(), centerLoc.getLongitude(), cityBeans.get(i).getLatitude(), cityBeans.get(i).getLongitude()));
+			if(cityBeans.get(i).getDistance() > distance){
+				cityBeans.remove(i);
+			}
+		}
+	}
+	
+	//algorithm provided by zips.sf.net. thanks guys!
+	private double calcDistance(double latA, double longA, double latB, double longB)
+	{
+		double theDistance = (Math.sin(Math.toRadians(latA)) *
+		Math.sin(Math.toRadians(latB)) +
+		Math.cos(Math.toRadians(latA)) *
+		Math.cos(Math.toRadians(latB)) *
+		Math.cos(Math.toRadians(longA - longB)));
+		return ((Math.toDegrees(Math.acos(theDistance))) * 69.09);
 	}
 	
 }

@@ -5,10 +5,12 @@ import java.util.Date;
 public class Parameters
 {
 	private long id;
-    private String zipCode;
+    private int zipCode;
     private int radius;
 //    private Date startDate;
 //    private Date endDate;
+    private double longitude;
+	private double latitude;
 	
 
     public int getRadius()
@@ -21,12 +23,12 @@ public class Parameters
         this.radius = radius;
     }
 
-    public String getZipCode()
+    public int getZipCode()
     {
         return zipCode;
     }
 
-    public void setZipCode(String zipCode)
+    public void setZipCode(int zipCode)
     {
         this.zipCode = zipCode;
     }
@@ -59,5 +61,24 @@ public class Parameters
 	public void setId(long id)
 	{
 		this.id = id;
+	}
+	
+	    public double getLongitude()
+    {
+		return longitude;
+	}
+	
+	public void setLongitude(double longitude)
+	{
+		this.longitude = longitude;
+	}
+    public double getLatitude()
+    {
+		return latitude;
+	}
+	
+	public void setLatitude(double latitude)
+	{
+		this.latitude = latitude;
 	}
 }

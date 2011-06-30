@@ -5,17 +5,17 @@
 <hibernate-configuration> 
 	<session-factory> 
 		<!-- Database connection settings -->
-		<property name="connection.driver_class">org.postgresql.Driver</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 		<!-- 	replace localhost with ip if needed 
 				replace ide with the name of the database to be used -->
-		<property name="connection.url">jdbc:postgresql://localhost/better</property>
+		<property name="connection.url">jdbc:mysql://localhost/woofwoof</property>
 		<!-- 	replace root with your mysql username -->
-		<property name="connection.username">betterweather</property>
+		<property name="connection.username">root</property>
 		<!-- 	replace jcd213 with your mysql password -->
-		<property name="connection.password">k1ttenm1ttens</property>
+		<property name="connection.password">jcd213</property>
  
 		<!-- SQL dialect -->
-		<property name="dialect">org.hibernatespatial.postgis.PostgisDialect</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
  
 		<!-- Echo all executed SQL to stdout -->
 		<property name="show_sql">true</property>
@@ -23,5 +23,6 @@
 		<property name="current_session_context_class">thread</property> 
  
 		<mapping resource="/City.hbm.xml" /> 
+		<mapping resource="/CenterGeo.hbm.xml" /> 
 	</session-factory> 
 </hibernate-configuration>
