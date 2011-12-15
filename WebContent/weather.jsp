@@ -29,11 +29,12 @@
 			color: 222;
 		}
 	</style>
+	<link rel="icon" type="image/gif" href="favicon.ico">
 </head>
 <body>
-	<s:form action="getWeather" class="mainform">
-		  <s:textfield key="parametersBean.zipCode" />
-		  <s:textfield key="parametersBean.radius" /> 
+	<s:form action="getWeather" class="mainform" namespace="/">
+		  <s:textfield name="parametersBean.zipCode" key="parametersBean.zipCode" />
+		  <s:textfield name="parametersBean.radius"  key="parametersBean.radius"/> 
 		  <s:submit key= "submit"/>  	  
 	</s:form>	
 
@@ -47,6 +48,11 @@
 	<s:if test="centerLoc!=null">
 		<p class="insertionsuccess">
 			<s:property value="centerLoc.toString()" />
+		</p>
+	</s:if>
+	<s:if test="cityBeans==null">
+		<p class="insertionsuccess">
+			sorry, we didn't get anything...
 		</p>
 	</s:if>
 

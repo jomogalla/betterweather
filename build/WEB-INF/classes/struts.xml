@@ -8,6 +8,9 @@
 	<constant name="struts.custom.i18n.resources" value="global" />
 	
 	<package name="betterweather"  extends="struts-default">
+	<!--	<interceptors>
+			<interceptor name="validation" class="org.apache.struts2.interceptor.validation.AnnotationValidationInterceptor"/>
+		</interceptors> -->
 		<default-action-ref name="fallback"/>
 		
 		<!-- List Actions -->
@@ -20,6 +23,7 @@
 		</action>
 		
 		<action name="getWeather" class="action.WeatherAction" method="execute">
+			<result name="input">/weather.jsp</result>
 			<result name="success">/weather.jsp</result>
 		</action>
 		

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+            <!DOCTYPE hibernate-mapping PUBLIC
+                "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+	<class name="model.CenterGeo" table="zipCodes">
+		<id name="id" column="geoID">
+			<generator class="increment"/>
+		</id>
+		<property name="longitude" type="double" column="longitude" />
+		<property name="latitude" type="double" column="latitude" />
+		<!--<property name="distance" type="double" column="distance" />-->
+	</class>
+ 
+</hibernate-mapping>
